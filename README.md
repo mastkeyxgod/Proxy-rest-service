@@ -28,13 +28,13 @@
 
 Чтобы создать нувую привилегию, нужно воспользоваться методом `createPrivilegeIfNotFound(String name)` в классе `ru/mastkey/vkbackendtest/setup/SetupDataLoader.java`, например:
 ```java
-            Privilege postCreatePrivilege = createPrivilegeIfNotFound("CREATE_POSTS_PRIVILEGE");
+Privilege postCreatePrivilege = createPrivilegeIfNotFound("CREATE_POSTS_PRIVILEGE");
 ```
 Это создаст привилегию CREATE_POSTS_PRIVILEGE.
 
 Создание ролей также происходит в этом классе, но методом `createRoleIfNotFound(String name, Set<Privilege> privileges)`, например:
 ```java
-                createRoleIfNotFound("ROLE_USERS_EDITOR", Set.of(userCreatePrivilege, userUpdatePrivilege, userDeletePrivilege));
+createRoleIfNotFound("ROLE_USERS_EDITOR", Set.of(userCreatePrivilege, userUpdatePrivilege, userDeletePrivilege));
 ```
 
 Для создания роли нам нужно передать **Сет** привилегий, чтобы они стали доступны этой роли. Но мы также можем передать пустой сет, и добавить привилегии через настройку иерархии.
@@ -59,7 +59,7 @@
 ```java
   "ROLE_A > ROLE_B";
 ```
-И после этого все привилегии, имеющиеся у роли B, станут доступны роли A, если при запуске приложения у нас указан параметр [настройки ролей](#настройка-ролей-и-привилегий-).
+И после этого все привилегии, имеющиеся у роли B, станут доступны роли A, если при запуске приложения у нас указан параметр [настройки ролей](#настройка-ролей-и-привилегий).
 
 
 Вот так выглядит иерархия роллей с их привилегиями в проекте:
