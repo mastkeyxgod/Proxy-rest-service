@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/vk-test
+    url: jdbc:mysql://localhost:3306/security
     username: root
     password: root
   jpa:
@@ -18,3 +18,7 @@ albums:
 setup:
   roles-and-privileges: false
   test-users: false
+
+cache:
+  life-time-in-minutes: 5
+  max-size: 100
