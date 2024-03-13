@@ -64,7 +64,7 @@ createRoleIfNotFound("ROLE_USERS_EDITOR", Set.of(userCreatePrivilege, userUpdate
 
 Вот так выглядит иерархия роллей с их привилегиями в проекте:
 
-![alt text](src/main/resources/readme/roles.png)
+![roles](https://github.com/mastkeyxgod/Vk-Java-Internship-Test/assets/126360234/d64dd9e3-0a9b-4583-b99d-20bf416c3113)
 
 * **ROLE_ADMIN** - имеет доступ ко всем обработчикам и админскому обработчику
 * **ROLE_POSTS_EDITOR** - имеет доступ ко всем обработчикам /api/v1/jph/posts/**
@@ -94,7 +94,8 @@ createRoleIfNotFound("ROLE_USERS_EDITOR", Set.of(userCreatePrivilege, userUpdate
 
 Таблица аудита в БД:
 
-![alt-text](src/main/resources/readme/audit.jpg)
+![audit](https://github.com/mastkeyxgod/Vk-Java-Internship-Test/assets/126360234/2d0f2dad-288c-45cd-86fe-74d3e48b2de7)
+
 
 ## 5. Реализовать inmemory кэш.
 
@@ -152,7 +153,7 @@ PATCH - обновляется в кэше, а при DELETE - удаляетс�
 
 Структура базы данных:
 
-![alt text](src/main/resources/readme/db.png)
+![db](https://github.com/mastkeyxgod/Vk-Java-Internship-Test/assets/126360234/fea42a4d-89fb-4a92-af07-598847a37781)
 
 ## 2. Добавление REST Api для создания пользователей.
 
