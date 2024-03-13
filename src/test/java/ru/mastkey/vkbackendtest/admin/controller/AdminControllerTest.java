@@ -3,18 +3,16 @@ package ru.mastkey.vkbackendtest.admin.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.mastkey.vkbackendtest.admin.controller.dto.AddOrRemoveUserRoleRequest;
-import ru.mastkey.vkbackendtest.admin.service.AdminService;
-import ru.mastkey.vkbackendtest.registration.controller.dto.StatusResponse;
+import ru.mastkey.vkbackendtest.dto.AddOrRemoveUserRoleRequest;
+import ru.mastkey.vkbackendtest.controller.AdminController;
+import ru.mastkey.vkbackendtest.service.AdminService;
+import ru.mastkey.vkbackendtest.dto.StatusResponse;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -39,7 +37,7 @@ class AdminControllerTest {
         AddOrRemoveUserRoleRequest request = new AddOrRemoveUserRoleRequest("username", "ROLE_NAME");
         StatusResponse response = new StatusResponse("Role added successfully");
 
-        when(adminService.addRoleToUser(request)).thenReturn(ResponseEntity.ok(response));
+        when(adminService.addRoleToUser(request)).thenReturn(response);
 
         mockMvc.perform(post("/api/v1/admin/add-role")
                         .with(csrf())
@@ -54,7 +52,7 @@ class AdminControllerTest {
         AddOrRemoveUserRoleRequest request = new AddOrRemoveUserRoleRequest("username", "ROLE_NAME");
         StatusResponse response = new StatusResponse("Role removed successfully");
 
-        when(adminService.removeRoleFromUser(request)).thenReturn(ResponseEntity.ok(response));
+        when(adminService.removeRoleFromUser(request)).thenReturn(response);
 
         mockMvc.perform(post("/api/v1/admin/remove-role")
                         .with(csrf())
@@ -69,7 +67,7 @@ class AdminControllerTest {
         AddOrRemoveUserRoleRequest request = new AddOrRemoveUserRoleRequest("username", "ROLE_NAME");
         StatusResponse response = new StatusResponse("Role removed successfully");
 
-        when(adminService.removeRoleFromUser(request)).thenReturn(ResponseEntity.ok(response));
+        when(adminService.removeRoleFromUser(request)).thenReturn(response);
 
         mockMvc.perform(post("/api/v1/admin/remove-role")
                         .with(csrf())
@@ -84,7 +82,7 @@ class AdminControllerTest {
         AddOrRemoveUserRoleRequest request = new AddOrRemoveUserRoleRequest("username", "ROLE_NAME");
         StatusResponse response = new StatusResponse("Role added successfully");
 
-        when(adminService.addRoleToUser(request)).thenReturn(ResponseEntity.ok(response));
+        when(adminService.addRoleToUser(request)).thenReturn(response);
 
         mockMvc.perform(post("/api/v1/admin/add-role")
                         .with(csrf())

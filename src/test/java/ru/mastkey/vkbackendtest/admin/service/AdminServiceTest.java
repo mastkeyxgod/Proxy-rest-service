@@ -4,6 +4,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import ru.mastkey.vkbackendtest.repositories.RoleRepository;
 import ru.mastkey.vkbackendtest.repositories.UserRepository;
+import ru.mastkey.vkbackendtest.service.AdminService;
 
 class AdminServiceTest {
 

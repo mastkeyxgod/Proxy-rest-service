@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.mastkey.vkbackendtest.jsonPlaceHolder.dto.albums.AlbumsResponse;
@@ -35,7 +36,7 @@ public class UsersController {
     )
     @GetMapping("/users")
     public ResponseEntity<List<UsersResponse>> getAllUsers() {
-        return usersService.getAllUsers();
+        return ResponseEntity.ok(usersService.getAllUsers());
     }
 
 
@@ -45,7 +46,7 @@ public class UsersController {
     )
     @GetMapping("/users/{id}")
     public ResponseEntity<UsersResponse>  getUserById(@PathVariable @Parameter(description = "Id пользователя") Long id) {
-        return usersService.getUserById(id);
+        return ResponseEntity.ok(usersService.getUserById(id));
     }
 
 
@@ -55,7 +56,7 @@ public class UsersController {
     )
     @GetMapping("/users/{id}/posts")
     public ResponseEntity<List<PostsResponse>>  getUserPosts(@PathVariable @Parameter(description = "Id пользователя") Long id) {
-        return usersService.getUserPosts(id);
+        return ResponseEntity.ok(usersService.getUserPosts(id));
     }
 
 
@@ -65,7 +66,7 @@ public class UsersController {
     )
     @GetMapping("/users/{id}/todos")
     public ResponseEntity<List<ToDosResponse>>  getUserTodos(@PathVariable @Parameter(description = "Id пользователя") Long id) {
-        return usersService.getUserToDos(id);
+        return ResponseEntity.ok(usersService.getUserToDos(id));
     }
 
 
@@ -75,7 +76,7 @@ public class UsersController {
     )
     @GetMapping("/users/{id}/albums")
     public ResponseEntity<List<AlbumsResponse>>  getUserAlbums(@PathVariable @Parameter(description = "Id пользователя") Long id) {
-        return usersService.getUserAlbums(id);
+        return ResponseEntity.ok(usersService.getUserAlbums(id));
     }
 
 
@@ -85,7 +86,7 @@ public class UsersController {
     )
     @PostMapping("/users")
     public ResponseEntity<UsersResponse> addNewUser(@Valid @RequestBody UsersRequest usersRequest) {
-        return usersService.addNewUser(usersRequest);
+        return ResponseEntity.ok(usersService.addNewUser(usersRequest));
     }
 
 
@@ -95,7 +96,7 @@ public class UsersController {
     )
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable @Parameter(description = "Id пользователя") Long id) {
-        return usersService.deleteUserById(id);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
@@ -105,7 +106,7 @@ public class UsersController {
     )
     @PutMapping("/users/{id}")
     public ResponseEntity<UsersResponse> updateUserById(@PathVariable @Parameter(description = "Id пользователя") Long id, @Valid@RequestBody UsersRequest user) {
-        return usersService.updateUserById(id, user);
+        return ResponseEntity.ok(usersService.updateUserById(id, user));
     }
 
 
@@ -115,6 +116,6 @@ public class UsersController {
     )
     @PatchMapping("/users/{id}")
     public ResponseEntity<UsersResponse> updateUserFieldsById(@PathVariable @Parameter(description = "Id пользователя") Long id, @RequestBody UsersRequest user) {
-        return usersService.updateUserFieldsById(id, user);
+        return ResponseEntity.ok(usersService.updateUserFieldsById(id, user));
     }
 }

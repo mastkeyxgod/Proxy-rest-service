@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
-@Data
 public class Role {
 
     @Id
@@ -39,4 +38,31 @@ public class Role {
     public Role() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Collection<User> getUsers() {
+        return users;
+    }
+
+    public Set<Privilege> getPrivileges() {
+        return privileges;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUsers(Collection<User> users) {
+        this.users = users;
+    }
+
+    public void setPrivileges(Set<Privilege> privileges) {
+        this.privileges = privileges;
+    }
 }

@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 @Entity
-@Data
 public class Privilege implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,5 +27,25 @@ public class Privilege implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }

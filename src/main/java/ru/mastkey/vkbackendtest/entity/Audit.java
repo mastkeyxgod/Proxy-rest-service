@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
-@Data
 public class Audit {
 
     @Id
@@ -33,5 +32,57 @@ public class Audit {
         this.user = user;
         this.endpoint = endpoint;
         this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public String getEndpoint() {
+        return endpoint;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 }

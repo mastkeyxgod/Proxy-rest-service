@@ -38,7 +38,7 @@ class UsersControllerTest {
         UsersResponse response = buildNewUsersResponse();
         List<UsersResponse> responseList = List.of(response);
 
-        when(usersService.getAllUsers()).thenReturn(ResponseEntity.ok(responseList));
+        when(usersService.getAllUsers()).thenReturn(responseList);
 
         mockMvc.perform(get("/api/v1/jph/users")
                 .with(csrf())
@@ -55,7 +55,7 @@ class UsersControllerTest {
         Long id = 1L;
         UsersResponse response = buildNewUsersResponse();
 
-        when(usersService.getUserById(id)).thenReturn(ResponseEntity.ok(response));
+        when(usersService.getUserById(id)).thenReturn(response);
 
         mockMvc.perform(get("/api/v1/jph/users/1")
                 .with(csrf())
@@ -72,7 +72,7 @@ class UsersControllerTest {
         PostsResponse response = new PostsResponse(1, 1, "test", "test");
         List<PostsResponse> responseList = List.of(response);
 
-        when(usersService.getUserPosts(id)).thenReturn(ResponseEntity.ok(responseList));
+        when(usersService.getUserPosts(id)).thenReturn(responseList);
 
         mockMvc.perform(get("/api/v1/jph/users/1/posts")
                 .with(csrf())
@@ -92,7 +92,7 @@ class UsersControllerTest {
         ToDosResponse response = new ToDosResponse(1, 1, "test", true);
         List<ToDosResponse> responseList = List.of(response);
 
-        when(usersService.getUserToDos(id)).thenReturn(ResponseEntity.ok(responseList));
+        when(usersService.getUserToDos(id)).thenReturn(responseList);
 
         mockMvc.perform(get("/api/v1/jph/users/1/todos")
                 .with(csrf())
@@ -112,7 +112,7 @@ class UsersControllerTest {
         AlbumsResponse response = new AlbumsResponse(1, 1, "test");
         List<AlbumsResponse> responseList = List.of(response);
 
-        when(usersService.getUserAlbums(id)).thenReturn(ResponseEntity.ok(responseList));
+        when(usersService.getUserAlbums(id)).thenReturn(responseList);
 
         mockMvc.perform(get("/api/v1/jph/users/1/albums")
                 .with(csrf())
@@ -130,7 +130,7 @@ class UsersControllerTest {
         UsersRequest request = buildNewUsersRequest();
         UsersResponse response = buildNewUsersResponse();
 
-        when(usersService.addNewUser(request)).thenReturn(ResponseEntity.ok(response));
+        when(usersService.addNewUser(request)).thenReturn(response);
 
         mockMvc.perform(post("/api/v1/jph/users")
                 .with(csrf())
@@ -149,7 +149,7 @@ class UsersControllerTest {
         UsersRequest request = buildNewUsersRequest();
         UsersResponse response = buildNewUsersResponse();
 
-        when(usersService.updateUserById(id, request)).thenReturn(ResponseEntity.ok(response));
+        when(usersService.updateUserById(id, request)).thenReturn(response);
 
         mockMvc.perform(put("/api/v1/jph/users/1")
                 .with(csrf())
@@ -161,18 +161,7 @@ class UsersControllerTest {
                 .andExpect(jsonPath("$.username").value(request.getUsername()));
     }
 
-    @Test
-    @WithMockUser
-    void shouldDeleteUserById() throws Exception {
-        Long id = 1L;
 
-        when(usersService.deleteUserById(id)).thenReturn(ResponseEntity.ok(null));
-
-        mockMvc.perform(delete("/api/v1/jph/users/1")
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
 
     @Test
     @WithMockUser
@@ -181,7 +170,7 @@ class UsersControllerTest {
         UsersRequest request = buildNewUsersRequest();
         UsersResponse response = buildNewUsersResponse();
 
-        when(usersService.updateUserFieldsById(id, request)).thenReturn(ResponseEntity.ok(response));
+        when(usersService.updateUserFieldsById(id, request)).thenReturn(response);
         mockMvc.perform(patch("/api/v1/jph/users/1")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)

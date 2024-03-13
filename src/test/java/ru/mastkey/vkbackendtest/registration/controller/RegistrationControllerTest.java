@@ -9,9 +9,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.mastkey.vkbackendtest.registration.controller.dto.StatusResponse;
-import ru.mastkey.vkbackendtest.registration.controller.dto.UserRegistrationRequest;
-import ru.mastkey.vkbackendtest.registration.service.RegistrationService;
+import ru.mastkey.vkbackendtest.controller.RegistrationController;
+import ru.mastkey.vkbackendtest.dto.StatusResponse;
+import ru.mastkey.vkbackendtest.dto.UserRegistrationRequest;
+import ru.mastkey.vkbackendtest.service.RegistrationService;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;

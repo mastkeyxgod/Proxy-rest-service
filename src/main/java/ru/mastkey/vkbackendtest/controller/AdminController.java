@@ -1,4 +1,4 @@
-package ru.mastkey.vkbackendtest.admin.controller;
+package ru.mastkey.vkbackendtest.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.mastkey.vkbackendtest.admin.controller.dto.AddOrRemoveUserRoleRequest;
-import ru.mastkey.vkbackendtest.admin.service.AdminService;
-import ru.mastkey.vkbackendtest.registration.controller.dto.StatusResponse;
+import ru.mastkey.vkbackendtest.dto.AddOrRemoveUserRoleRequest;
+import ru.mastkey.vkbackendtest.service.AdminService;
+import ru.mastkey.vkbackendtest.dto.StatusResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +27,11 @@ public class AdminController {
     )
     @PostMapping("/add-role")
     public ResponseEntity<StatusResponse> addRole(@RequestBody AddOrRemoveUserRoleRequest request) {
-        return adminService.addRoleToUser(request);
+        StatusResponse response = adminService.addRoleToUser(request);
+        if (!response.getStatus().equals("Role added")) {
+            return ResponseEntity.badRequest().body(response);
+        }
+        return ResponseEntity.ok(adminService.addRoleToUser(request));
     }
 
     @Operation(
@@ -36,6 +40,10 @@ public class AdminController {
     )
     @PostMapping("/remove-role")
     public ResponseEntity<StatusResponse> removeRole(@RequestBody AddOrRemoveUserRoleRequest request) {
-        return adminService.removeRoleFromUser(request);
+        StatusResponse statusResponse = adminService.removeRoleFromUser(request);
+        if (!statusResponse.getStatus().equals("Role removed")) {
+            return ResponseEntity.badRequest().body(statusResponse);
+        }
+        return ResponseEntity.ok(adminService.removeRoleFromUser(request));
     }
 }

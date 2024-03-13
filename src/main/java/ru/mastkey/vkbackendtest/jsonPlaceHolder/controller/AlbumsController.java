@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.mastkey.vkbackendtest.jsonPlaceHolder.dto.albums.AlbumsRequest;
@@ -29,7 +30,7 @@ public class AlbumsController {
     )
     @GetMapping("/albums")
     public ResponseEntity<List<AlbumsResponse>> getAllAlbums() {
-        return albumsService.getAllAlbums();
+        return ResponseEntity.ok(albumsService.getAllAlbums());
     }
 
 
@@ -39,7 +40,7 @@ public class AlbumsController {
     )
     @GetMapping("/albums/{id}")
     public ResponseEntity<AlbumsResponse> getAlbumById(@PathVariable @Parameter(description = "Id альбома") Long id) {
-        return albumsService.getAlbumById(id);
+        return ResponseEntity.ok(albumsService.getAlbumById(id));
     }
 
 
@@ -49,7 +50,7 @@ public class AlbumsController {
     )
     @GetMapping("/albums/{id}/photos")
     public ResponseEntity<List<PhotosResponse>> getPhotosByAlbumId(@PathVariable @Parameter(description = "Id альбома") Long id) {
-        return albumsService.getPhotosByAlbumId(id);
+        return ResponseEntity.ok(albumsService.getPhotosByAlbumId(id));
     }
 
 
@@ -59,7 +60,7 @@ public class AlbumsController {
     )
     @PostMapping("/albums")
     public ResponseEntity<AlbumsResponse> createAlbum(@Valid @RequestBody AlbumsRequest albumsRequest) {
-        return albumsService.createAlbum(albumsRequest);
+        return ResponseEntity.ok(albumsService.createAlbum(albumsRequest));
     }
 
 
@@ -69,7 +70,7 @@ public class AlbumsController {
     )
     @PutMapping("/albums/{id}")
     public ResponseEntity<AlbumsResponse> updateAlbum(@PathVariable @Parameter(description = "Id альбома") Long id, @Valid @RequestBody AlbumsRequest albumsRequest) {
-        return albumsService.updateAlbum(id, albumsRequest);
+        return ResponseEntity.ok(albumsService.updateAlbum(id, albumsRequest));
     }
 
 
@@ -79,7 +80,7 @@ public class AlbumsController {
     )
     @PatchMapping("/albums/{id}")
     public ResponseEntity<AlbumsResponse> patchAlbumById(@PathVariable @Parameter(description = "Id альбома") Long id, @RequestBody AlbumsRequest albumsRequest) {
-        return albumsService.patchAlbumById(id, albumsRequest);
+        return ResponseEntity.ok(albumsService.patchAlbumById(id, albumsRequest));
     }
 
     @Operation(
@@ -88,6 +89,6 @@ public class AlbumsController {
     )
     @DeleteMapping("/albums/{id}")
     public ResponseEntity<?> deleteAlbumById(@PathVariable @Parameter(description = "Id альбома") Long id) {
-        return albumsService.deleteAlbumById(id);
+        return ResponseEntity.ok().body(HttpStatus.OK);
     }
 }

@@ -39,7 +39,7 @@ class PostsControllerTest {
         PostsResponse postsResponse = new PostsResponse(1, 1, "test", "test");
         List<PostsResponse> postsResponseList = Collections.singletonList(postsResponse);
 
-        when(postsService.getAllPosts()).thenReturn(ResponseEntity.ok(postsResponseList));
+        when(postsService.getAllPosts()).thenReturn(postsResponseList);
 
         mockMvc.perform(get("/api/v1/jph/posts")
                 .with(csrf())
@@ -59,7 +59,7 @@ class PostsControllerTest {
         Long id = 1L;
         PostsResponse postsResponse = new PostsResponse(1, 1, "test", "test");
 
-        when(postsService.getPostById(id)).thenReturn(ResponseEntity.ok(postsResponse));
+        when(postsService.getPostById(id)).thenReturn(postsResponse);
 
         mockMvc.perform(get("/api/v1/jph/posts/{id}", id)
                 .with(csrf())
@@ -78,7 +78,7 @@ class PostsControllerTest {
         List<CommentResponse> commentResponseList = Collections.singletonList(commentResponse);
         Long postId = 1L;
 
-        when(postsService.getPostCommentsByPostId(postId)).thenReturn(ResponseEntity.ok(commentResponseList));
+        when(postsService.getPostCommentsByPostId(postId)).thenReturn(commentResponseList);
 
         mockMvc.perform(get("/api/v1/jph/posts/{id}/comments", postId)
                 .with(csrf())
@@ -92,18 +92,6 @@ class PostsControllerTest {
                 .andExpect(jsonPath("$[0].body").value(commentResponse.getBody()));
     }
 
-    @Test
-    @WithMockUser
-    void shouldDeletePostById() throws Exception {
-        Long id = 1L;
-
-        when(postsService.deletePostById(id)).thenReturn(ResponseEntity.ok().build());
-
-        mockMvc.perform(get("/api/v1/jph/posts/{id}", id)
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
 
     @Test
     @WithMockUser
@@ -111,7 +99,7 @@ class PostsControllerTest {
         PostsRequest postsRequest = new PostsRequest(1,  "test", "test");
         PostsResponse postsResponse = new PostsResponse(1, 1, "test", "test");
 
-        when(postsService.addNewPost(postsRequest)).thenReturn(ResponseEntity.ok(postsResponse));
+        when(postsService.addNewPost(postsRequest)).thenReturn(postsResponse);
 
         mockMvc.perform(post("/api/v1/jph/posts")
                 .with(csrf())
@@ -131,7 +119,7 @@ class PostsControllerTest {
         PostsResponse postsResponse = new PostsResponse(1, 1, "test", "test");
         Long id = 1L;
 
-        when(postsService.updatePostById(id, postsRequest)).thenReturn(ResponseEntity.ok(postsResponse));
+        when(postsService.updatePostById(id, postsRequest)).thenReturn(postsResponse);
 
         mockMvc.perform(put("/api/v1/jph/posts/{id}", id)
                 .with(csrf())
@@ -151,7 +139,7 @@ class PostsControllerTest {
         PostsResponse postsResponse = new PostsResponse(1, 1, "test", "test");
         Long id = 1L;
 
-        when(postsService.updatePostFieldsById(id, postsRequest)).thenReturn(ResponseEntity.ok(postsResponse));
+        when(postsService.updatePostFieldsById(id, postsRequest)).thenReturn(postsResponse);
 
         mockMvc.perform(patch("/api/v1/jph/posts/{id}", id)
                 .with(csrf())

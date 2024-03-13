@@ -22,52 +22,51 @@ import java.util.List;
 public class UsersService {
     private final UsersClient usersClient;
 
-    public ResponseEntity<List<UsersResponse>> getAllUsers() {
+    public List<UsersResponse> getAllUsers() {
         List<UsersResponse> users = usersClient.getAllUsers();
-        return ResponseEntity.ok(users);
+        return users;
     }
 
     @Cacheable
-    public ResponseEntity<UsersResponse> getUserById(Long id) {
+    public UsersResponse getUserById(Long id) {
         UsersResponse user = usersClient.getUserById(id);
-        return ResponseEntity.ok(user);
+        return user;
     }
 
-    public ResponseEntity<List<PostsResponse>> getUserPosts(Long id) {
+    public List<PostsResponse> getUserPosts(Long id) {
         List<PostsResponse> posts = usersClient.getUserPosts(id);
-        return ResponseEntity.ok(posts);
+        return posts;
     }
 
-    public ResponseEntity<List<ToDosResponse>> getUserToDos(Long id) {
+    public List<ToDosResponse> getUserToDos(Long id) {
         List<ToDosResponse> todos = usersClient.getUserToDos(id);
-        return ResponseEntity.ok(todos);
+        return todos;
     }
 
-    public ResponseEntity<List<AlbumsResponse>> getUserAlbums(Long id) {
+    public List<AlbumsResponse> getUserAlbums(Long id) {
         List<AlbumsResponse> albums = usersClient.getUserAlbums(id);
-        return ResponseEntity.ok(albums);
+        return albums;
     }
 
     @CacheEvict
-    public ResponseEntity<?> deleteUserById(Long id) {
+    public void deleteUserById(Long id) {
         usersClient.deleteUserById(id);
-        return ResponseEntity.ok().build();
     }
 
     @CachePut
-    public ResponseEntity<UsersResponse> updateUserFieldsById(Long id, UsersRequest user) {
+    public UsersResponse updateUserFieldsById(Long id, UsersRequest user) {
         UsersResponse userResponse = usersClient.updateUserFieldsById(id, user);
-        return ResponseEntity.ok(userResponse);
+        return userResponse;
     }
 
     @CachePut
-    public ResponseEntity<UsersResponse> updateUserById(Long id, UsersRequest user) {
+    public UsersResponse updateUserById(Long id, UsersRequest user) {
         UsersResponse userResponse = usersClient.updateUserById(id, user);
-        return ResponseEntity.ok(userResponse);
+        return userResponse;
     }
 
-    public ResponseEntity<UsersResponse> addNewUser(UsersRequest usersRequest) {
+    public UsersResponse addNewUser(UsersRequest usersRequest) {
         UsersResponse userResponse = usersClient.addNewUser(usersRequest);
-        return ResponseEntity.ok(userResponse);
+        return userResponse;
     }
 }

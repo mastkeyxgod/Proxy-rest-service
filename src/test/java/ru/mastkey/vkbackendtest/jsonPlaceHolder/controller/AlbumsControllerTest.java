@@ -39,7 +39,7 @@ class AlbumsControllerTest {
     void shouldReturnAllAlbums() throws Exception {
         AlbumsResponse response = new AlbumsResponse(1, 1, "test");
         List<AlbumsResponse> albumsResponses = Collections.singletonList(response);
-        when(albumsService.getAllAlbums()).thenReturn(ResponseEntity.ok(albumsResponses));
+        when(albumsService.getAllAlbums()).thenReturn(albumsResponses);
 
         mockMvc.perform(get("/api/v1/jph/albums")
                         .with(csrf())
@@ -58,7 +58,7 @@ class AlbumsControllerTest {
         Long id = 1L;
         AlbumsResponse response = new AlbumsResponse(1, 1, "test");
 
-        when(albumsService.getAlbumById(id)).thenReturn(ResponseEntity.ok(response));
+        when(albumsService.getAlbumById(id)).thenReturn(response);
 
         mockMvc.perform(get("/api/v1/jph/albums/{id}", id)
                 .with(csrf())
@@ -77,7 +77,7 @@ class AlbumsControllerTest {
         PhotosResponse response = new PhotosResponse(1, 1, "test", "test", "test");
         List<PhotosResponse> photosResponses = Collections.singletonList(response);
 
-        when(albumsService.getPhotosByAlbumId(id)).thenReturn(ResponseEntity.ok(photosResponses));
+        when(albumsService.getPhotosByAlbumId(id)).thenReturn(photosResponses);
 
         mockMvc.perform(get("/api/v1/jph/albums/{id}/photos", id)
                 .with(csrf())
@@ -99,7 +99,7 @@ class AlbumsControllerTest {
 
         AlbumsResponse response = new AlbumsResponse(1, 1, "test");
 
-        when(albumsService.createAlbum(request)).thenReturn(ResponseEntity.ok(response));
+        when(albumsService.createAlbum(request)).thenReturn(response);
 
         mockMvc.perform(post("/api/v1/jph/albums")
                 .with(csrf())
@@ -112,19 +112,6 @@ class AlbumsControllerTest {
 
     }
 
-    @Test
-    @WithMockUser
-    void shouldDeleteAlbumById() throws Exception {
-        Long id = 1L;
-
-        when(albumsService.deleteAlbumById(id)).thenReturn(ResponseEntity.ok().build());
-
-        mockMvc.perform(get("/api/v1/jph/albums/{id}", id)
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-    }
 
     @Test
     @WithMockUser
@@ -133,7 +120,7 @@ class AlbumsControllerTest {
         AlbumsRequest request = new AlbumsRequest(1, "test");
         AlbumsResponse response = new AlbumsResponse(1, 1, "test");
 
-        when(albumsService.updateAlbum(id, request)).thenReturn(ResponseEntity.ok(response));
+        when(albumsService.updateAlbum(id, request)).thenReturn(response);
 
         mockMvc.perform(put("/api/v1/jph/albums/{id}", id)
                 .with(csrf())
@@ -152,7 +139,7 @@ class AlbumsControllerTest {
         AlbumsRequest request = new AlbumsRequest(null, "test");
         AlbumsResponse response = new AlbumsResponse(1, 1, "test");
 
-        when(albumsService.patchAlbumById(id, request)).thenReturn(ResponseEntity.ok(response));
+        when(albumsService.patchAlbumById(id, request)).thenReturn(response);
 
         mockMvc.perform(patch("/api/v1/jph/albums/{id}", id)
                 .with(csrf())

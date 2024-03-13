@@ -21,42 +21,40 @@ public class PostsService {
 
     private final PostsClient postsClient;
 
-    public ResponseEntity<List<PostsResponse>> getAllPosts() {
+    public List<PostsResponse> getAllPosts() {
         List<PostsResponse> posts = postsClient.getAllPosts();
-        return ResponseEntity.ok(posts);
+        return posts;
     }
 
     @Cacheable
-    public ResponseEntity<PostsResponse> getPostById(Long id) {
+    public PostsResponse getPostById(Long id) {
         PostsResponse post = postsClient.getPostById(id);
-        return ResponseEntity.ok(post);
+        return post;
     }
 
-    public ResponseEntity<List<CommentResponse>> getPostCommentsByPostId(Long id) {
+    public List<CommentResponse> getPostCommentsByPostId(Long id) {
         List<CommentResponse> comments = postsClient.getPostCommentsByPostId(id);
-        return ResponseEntity.ok(comments);
+        return comments;
     }
 
-    public ResponseEntity<PostsResponse> addNewPost(PostsRequest postRequest) {
-
+    public PostsResponse addNewPost(PostsRequest postRequest) {
         PostsResponse post = postsClient.addNewPost(postRequest);
-        return ResponseEntity.ok(post);
+        return post;
     }
 
     @CacheEvict
-    public ResponseEntity<?> deletePostById(Long id) {
+    public void deletePostById(Long id) {
         postsClient.deletePostById(id);
-        return ResponseEntity.ok().build();
     }
 
     @CachePut(cacheNames = {"PostsCache"}, key = "#id")
-    public ResponseEntity<PostsResponse> updatePostById(Long id, PostsRequest postRequest) {
+    public PostsResponse updatePostById(Long id, PostsRequest postRequest) {
         PostsResponse post = postsClient.updatePostById(id, postRequest);
-        return ResponseEntity.ok(post);
+        return post;
     }
     @CachePut(cacheNames = {"PostsCache"}, key = "#id")
-    public ResponseEntity<PostsResponse> updatePostFieldsById(Long id, PostsRequest postRequest) {
+    public PostsResponse updatePostFieldsById(Long id, PostsRequest postRequest) {
         PostsResponse post = postsClient.updatePostFieldsById(id, postRequest);
-        return ResponseEntity.ok(post);
+        return post;
     }
 }

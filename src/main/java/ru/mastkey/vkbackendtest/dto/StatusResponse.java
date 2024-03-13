@@ -1,4 +1,4 @@
-package ru.mastkey.vkbackendtest.registration.controller.dto;
+package ru.mastkey.vkbackendtest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

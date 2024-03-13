@@ -21,42 +21,42 @@ public class AlbumsService {
 
     private final AlbumsClient albumsClient;
 
-    public ResponseEntity<List<AlbumsResponse>> getAllAlbums() {
+    public List<AlbumsResponse> getAllAlbums() {
         List<AlbumsResponse> albums = albumsClient.getAllAlbums();
-        return ResponseEntity.ok(albums);
+        return albums;
     }
 
     @Cacheable
-    public ResponseEntity<AlbumsResponse> getAlbumById(Long id) {
+    public AlbumsResponse getAlbumById(Long id) {
         AlbumsResponse album = albumsClient.getAlbumById(id);
-        return ResponseEntity.ok(album);
+        return album;
     }
 
-    public ResponseEntity<List<PhotosResponse>> getPhotosByAlbumId(Long id) {
+    public List<PhotosResponse> getPhotosByAlbumId(Long id) {
         List<PhotosResponse> photos = albumsClient.getPhotosByAlbumId(id);
-        return ResponseEntity.ok(photos);
+        return photos;
     }
 
     @CacheEvict
-    public ResponseEntity<?> deleteAlbumById(Long id) {
+    public void deleteAlbumById(Long id) {
         albumsClient.deleteAlbumById(id);
-        return ResponseEntity.ok().build();
+
     }
 
-    public ResponseEntity<AlbumsResponse> createAlbum(AlbumsRequest albumsRequest) {
+    public AlbumsResponse createAlbum(AlbumsRequest albumsRequest) {
         AlbumsResponse albumsResponse = albumsClient.createAlbum(albumsRequest);
-        return ResponseEntity.ok(albumsResponse);
+        return albumsResponse;
     }
 
     @CachePut
-    public ResponseEntity<AlbumsResponse> updateAlbum(Long id, AlbumsRequest albumsRequest) {
+    public AlbumsResponse updateAlbum(Long id, AlbumsRequest albumsRequest) {
         AlbumsResponse albumsResponse = albumsClient.updateAlbum(id, albumsRequest);
-        return ResponseEntity.ok(albumsResponse);
+        return albumsResponse;
     }
 
     @CachePut
-    public ResponseEntity<AlbumsResponse> patchAlbumById(Long id, AlbumsRequest albumsRequest) {
+    public AlbumsResponse patchAlbumById(Long id, AlbumsRequest albumsRequest) {
         AlbumsResponse albumsResponse = albumsClient.patchAlbumById(id, albumsRequest);
-        return ResponseEntity.ok(albumsResponse);
+        return albumsResponse;
     }
 }

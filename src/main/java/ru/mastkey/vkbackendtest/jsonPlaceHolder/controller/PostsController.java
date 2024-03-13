@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.mastkey.vkbackendtest.jsonPlaceHolder.dto.posts.CommentResponse;
@@ -28,7 +29,7 @@ public class PostsController {
     )
     @GetMapping("/posts")
     public ResponseEntity<List<PostsResponse>> getAllPosts() {
-        return postService.getAllPosts();
+        return ResponseEntity.ok(postService.getAllPosts());
     }
 
 
@@ -38,7 +39,7 @@ public class PostsController {
     )
     @GetMapping("/posts/{id}")
     public ResponseEntity<PostsResponse>  getPostById(@PathVariable @Parameter(description = "Id поста") Long id) {
-        return postService.getPostById(id);
+        return ResponseEntity.ok(postService.getPostById(id));
     }
 
 
@@ -48,7 +49,7 @@ public class PostsController {
     )
     @GetMapping("/posts/{id}/comments")
     public ResponseEntity<List<CommentResponse>>  getPostCommentsByPostId(@PathVariable @Parameter(description = "Id поста") Long id) {
-        return postService.getPostCommentsByPostId(id);
+        return ResponseEntity.ok(postService.getPostCommentsByPostId(id));
     }
 
 
@@ -58,7 +59,7 @@ public class PostsController {
     )
     @PostMapping("/posts")
     public ResponseEntity<?> addNewPost(@Valid @RequestBody PostsRequest request) {
-        return postService.addNewPost(request);
+        return ResponseEntity.ok(postService.addNewPost(request));
     }
 
 
@@ -68,7 +69,7 @@ public class PostsController {
     )
     @DeleteMapping("/posts/{id}")
     public ResponseEntity<?> deletePostById(@PathVariable @Parameter(description = "Id поста") Long id) {
-        return postService.deletePostById(id);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
@@ -78,9 +79,8 @@ public class PostsController {
     )
     @PutMapping("/posts/{id}")
     public ResponseEntity<PostsResponse> updatePostById(@PathVariable @Parameter(description = "Id поста") Long id, @Valid @RequestBody PostsRequest request) {
-        return postService.updatePostById(id, request);
+        return ResponseEntity.ok(postService.updatePostById(id, request));
     }
-
 
 
     @Operation(
@@ -89,7 +89,6 @@ public class PostsController {
     )
     @PatchMapping("/posts/{id}")
     public ResponseEntity<PostsResponse> updatePostFieldsById(@PathVariable @Parameter(description = "Id поста") Long id, @RequestBody PostsRequest postRequest) {
-        return postService.updatePostFieldsById(id, postRequest);
+        return ResponseEntity.ok(postService.updatePostFieldsById(id, postRequest));
     }
-
 }
