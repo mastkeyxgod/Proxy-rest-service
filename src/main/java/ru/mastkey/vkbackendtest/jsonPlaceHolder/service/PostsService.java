@@ -1,6 +1,10 @@
 package ru.mastkey.vkbackendtest.jsonPlaceHolder.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.mastkey.vkbackendtest.jsonPlaceHolder.client.PostsClient;
@@ -12,6 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "PostsCache")
 public class PostsService {
 
     private final PostsClient postsClient;
@@ -21,6 +26,7 @@ public class PostsService {
         return ResponseEntity.ok(posts);
     }
 
+    @Cacheable
     public ResponseEntity<PostsResponse> getPostById(Long id) {
         PostsResponse post = postsClient.getPostById(id);
         return ResponseEntity.ok(post);
@@ -37,16 +43,18 @@ public class PostsService {
         return ResponseEntity.ok(post);
     }
 
+    @CacheEvict
     public ResponseEntity<?> deletePostById(Long id) {
         postsClient.deletePostById(id);
         return ResponseEntity.ok().build();
     }
 
+    @CachePut(cacheNames = {"PostsCache"}, key = "#id")
     public ResponseEntity<PostsResponse> updatePostById(Long id, PostsRequest postRequest) {
         PostsResponse post = postsClient.updatePostById(id, postRequest);
         return ResponseEntity.ok(post);
     }
-
+    @CachePut(cacheNames = {"PostsCache"}, key = "#id")
     public ResponseEntity<PostsResponse> updatePostFieldsById(Long id, PostsRequest postRequest) {
         PostsResponse post = postsClient.updatePostFieldsById(id, postRequest);
         return ResponseEntity.ok(post);

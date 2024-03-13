@@ -42,66 +42,71 @@ public class UsersClient {
             return objectMapper.readValue(response.getEntity().getContent(),
                     objectMapper.getTypeFactory().constructCollectionType(List.class, UsersResponse.class));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to get data from endpoint " + url, e);
         }
     }
 
     public UsersResponse getUserById(Long id) {
-        HttpGet httpGet = new HttpGet(url + "/" + id);
-        log.info("asdad");
+        String url = this.url + "/" + id;
+        HttpGet httpGet = new HttpGet(url);
 
         try (CloseableHttpResponse response = httpClient.execute(httpGet)){
             return objectMapper.readValue(response.getEntity().getContent(), UsersResponse.class);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to get data from endpoint " + url, e);
         }
     }
 
     public List<PostsResponse> getUserPosts(Long id) {
-        HttpGet httpGet = new HttpGet(url + "/" + id + "/posts");
+        String url = this.url + "/" + id + "/posts";
+        HttpGet httpGet = new HttpGet(url);
 
         try (CloseableHttpResponse response = httpClient.execute(httpGet)){
             return objectMapper.readValue(response.getEntity().getContent(),
                     objectMapper.getTypeFactory().constructCollectionType(List.class, PostsResponse.class));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to get data from endpoint " + url, e);
         }
     }
 
     public List<ToDosResponse> getUserToDos(Long id) {
-        HttpGet httpGet = new HttpGet(url + "/" + id + "/todos");
+        String url = this.url + "/" + id + "/todos";
+        HttpGet httpGet = new HttpGet(url);
 
         try (CloseableHttpResponse response = httpClient.execute(httpGet)){
             return objectMapper.readValue(response.getEntity().getContent(),
                     objectMapper.getTypeFactory().constructCollectionType(List.class, ToDosResponse.class));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to get data from endpoint " + url, e);
         }
     }
 
     public List<AlbumsResponse> getUserAlbums(Long id) {
-        HttpGet httpGet = new HttpGet(url + "/" + id + "/albums");
+        String url = this.url + "/" + id + "/albums";
+        HttpGet httpGet = new HttpGet(url);
 
         try (CloseableHttpResponse response = httpClient.execute(httpGet)){
             return objectMapper.readValue(response.getEntity().getContent(),
                     objectMapper.getTypeFactory().constructCollectionType(List.class, AlbumsResponse.class));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to get data from endpoint " + url, e);
         }
     }
 
     public void deleteUserById(Long id) {
-        HttpDelete httpDelete = new HttpDelete(url + "/" + id);
+        String url = this.url + "/" + id;
+        HttpDelete httpDelete = new HttpDelete(url);
 
         try (CloseableHttpResponse response = httpClient.execute(httpDelete)){
             objectMapper.readValue(response.getEntity().getContent(), UsersResponse.class);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to delete data from endpoint " + url, e);
         }
     }
 
     public UsersResponse updateUserFieldsById(Long id, UsersRequest usersRequest) {
-        HttpPatch httpPatch = new HttpPatch(url + "/" + id);
+        String url = this.url + "/" + id;
+        HttpPatch httpPatch = new HttpPatch(url);
         httpPatch.setHeader("Content-Type", "application/json");
 
         StringEntity entity;
@@ -110,25 +115,21 @@ public class UsersClient {
             String json = objectMapper.writeValueAsString(usersRequest);
             entity = new StringEntity(json);
         } catch (JsonProcessingException | UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to serialize data to json", e);
         }
 
         httpPatch.setEntity(entity);
 
         try (CloseableHttpResponse response = httpClient.execute(httpPatch)){
-            log.info(response.toString());
-            log.info("" +  response.getStatusLine().getStatusCode());
-
             return objectMapper.readValue(response.getEntity().getContent(), UsersResponse.class);
-        } catch (ClientProtocolException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to patch data to endpoint " + url, e);
         }
     }
 
     public UsersResponse updateUserById(Long id, UsersRequest usersRequest)  {
-        HttpPut httpPut = new HttpPut(url + "/" + id);
+        String url = this.url + "/" + id;
+        HttpPut httpPut = new HttpPut(url);
         httpPut.setHeader("Content-Type", "application/json");
 
         StringEntity entity;
@@ -137,19 +138,18 @@ public class UsersClient {
             String json = objectMapper.writeValueAsString(usersRequest);
             entity = new StringEntity(json);
         } catch (JsonProcessingException | UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to serialize data to json", e);
         }
         httpPut.setEntity(entity);
         try (CloseableHttpResponse response = httpClient.execute(httpPut)){
             return objectMapper.readValue(response.getEntity().getContent(), UsersResponse.class);
-        } catch (ClientProtocolException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to put data to endpoint " + url, e);
         }
     }
 
     public UsersResponse addNewUser(UsersRequest usersRequest)  {
+
         HttpPost httpPost = new HttpPost(url);
         httpPost.setHeader("Content-Type", "application/json");
 
@@ -159,17 +159,13 @@ public class UsersClient {
             String json = objectMapper.writeValueAsString(usersRequest);
             entity = new StringEntity(json);
         } catch (JsonProcessingException | UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to serialize data to json", e);
         }
         httpPost.setEntity(entity);
         try (CloseableHttpResponse response = httpClient.execute(httpPost)){
             return objectMapper.readValue(response.getEntity().getContent(), UsersResponse.class);
-        } catch (StreamReadException e) {
-            throw new RuntimeException(e);
-        } catch (DatabindException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to put data to endpoint " + url, e);
         }
     }
 }

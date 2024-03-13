@@ -1,6 +1,7 @@
 package ru.mastkey.vkbackendtest.jsonPlaceHolder.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -17,16 +18,16 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "UsersCache")
 public class UsersService {
     private final UsersClient usersClient;
-
 
     public ResponseEntity<List<UsersResponse>> getAllUsers() {
         List<UsersResponse> users = usersClient.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    @Cacheable(cacheNames = {"UserCache"}, key = "#id")
+    @Cacheable
     public ResponseEntity<UsersResponse> getUserById(Long id) {
         UsersResponse user = usersClient.getUserById(id);
         return ResponseEntity.ok(user);
@@ -47,19 +48,19 @@ public class UsersService {
         return ResponseEntity.ok(albums);
     }
 
-    @CacheEvict(cacheNames = {"UserCache"}, key = "#id")
+    @CacheEvict
     public ResponseEntity<?> deleteUserById(Long id) {
         usersClient.deleteUserById(id);
         return ResponseEntity.ok().build();
     }
 
-    @CachePut(cacheNames = {"UserCache"}, key = "#id")
+    @CachePut
     public ResponseEntity<UsersResponse> updateUserFieldsById(Long id, UsersRequest user) {
         UsersResponse userResponse = usersClient.updateUserFieldsById(id, user);
         return ResponseEntity.ok(userResponse);
     }
 
-    @CachePut(cacheNames = {"UserCache"}, key = "#id")
+    @CachePut
     public ResponseEntity<UsersResponse> updateUserById(Long id, UsersRequest user) {
         UsersResponse userResponse = usersClient.updateUserById(id, user);
         return ResponseEntity.ok(userResponse);

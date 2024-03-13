@@ -1,6 +1,7 @@
 package ru.mastkey.vkbackendtest.jsonPlaceHolder.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "AlbumsCache")
 public class AlbumsService {
 
     private final AlbumsClient albumsClient;
@@ -24,7 +26,7 @@ public class AlbumsService {
         return ResponseEntity.ok(albums);
     }
 
-    @Cacheable(cacheNames = "AlbumsCache", key = "#id")
+    @Cacheable
     public ResponseEntity<AlbumsResponse> getAlbumById(Long id) {
         AlbumsResponse album = albumsClient.getAlbumById(id);
         return ResponseEntity.ok(album);
@@ -35,7 +37,7 @@ public class AlbumsService {
         return ResponseEntity.ok(photos);
     }
 
-    @CacheEvict(cacheNames = "AlbumsCache", key = "#id")
+    @CacheEvict
     public ResponseEntity<?> deleteAlbumById(Long id) {
         albumsClient.deleteAlbumById(id);
         return ResponseEntity.ok().build();
@@ -46,13 +48,13 @@ public class AlbumsService {
         return ResponseEntity.ok(albumsResponse);
     }
 
-    @CachePut(cacheNames = "AlbumsCache", key = "#id")
+    @CachePut
     public ResponseEntity<AlbumsResponse> updateAlbum(Long id, AlbumsRequest albumsRequest) {
         AlbumsResponse albumsResponse = albumsClient.updateAlbum(id, albumsRequest);
         return ResponseEntity.ok(albumsResponse);
     }
 
-    @CachePut(cacheNames = "AlbumsCache", key = "#id")
+    @CachePut
     public ResponseEntity<AlbumsResponse> patchAlbumById(Long id, AlbumsRequest albumsRequest) {
         AlbumsResponse albumsResponse = albumsClient.patchAlbumById(id, albumsRequest);
         return ResponseEntity.ok(albumsResponse);
