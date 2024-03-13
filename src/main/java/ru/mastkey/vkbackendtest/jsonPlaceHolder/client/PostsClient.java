@@ -44,6 +44,7 @@ public class PostsClient {
     }
 
     public PostsResponse getPostById(Long id) {
+        log.info("Getting post by id {}", id);
         String url = this.url + "/" + id;
         HttpGet httpGet = new HttpGet(url);
         httpGet.setHeader("Content-Type", "application/json");

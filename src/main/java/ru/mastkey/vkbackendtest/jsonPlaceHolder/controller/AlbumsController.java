@@ -89,6 +89,7 @@ public class AlbumsController {
     )
     @DeleteMapping("/albums/{id}")
     public ResponseEntity<?> deleteAlbumById(@PathVariable @Parameter(description = "Id альбома") Long id) {
+        albumsService.deleteAlbumById(id);
         return ResponseEntity.ok().body(HttpStatus.OK);
     }
 }

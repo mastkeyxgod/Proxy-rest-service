@@ -96,6 +96,7 @@ public class UsersController {
     )
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable @Parameter(description = "Id пользователя") Long id) {
+        usersService.deleteUserById(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
