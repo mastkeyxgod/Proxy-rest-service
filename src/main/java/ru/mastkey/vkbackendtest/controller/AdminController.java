@@ -27,11 +27,8 @@ public class AdminController {
     )
     @PostMapping("/add-role")
     public ResponseEntity<StatusResponse> addRole(@RequestBody AddOrRemoveUserRoleRequest request) {
-        StatusResponse response = adminService.addRoleToUser(request);
-        if (!response.getStatus().equals("Role added")) {
-            return ResponseEntity.badRequest().body(response);
-        }
-        return ResponseEntity.ok(adminService.addRoleToUser(request));
+
+        return adminService.addRoleToUser(request);
     }
 
     @Operation(
@@ -40,10 +37,7 @@ public class AdminController {
     )
     @PostMapping("/remove-role")
     public ResponseEntity<StatusResponse> removeRole(@RequestBody AddOrRemoveUserRoleRequest request) {
-        StatusResponse statusResponse = adminService.removeRoleFromUser(request);
-        if (!statusResponse.getStatus().equals("Role removed")) {
-            return ResponseEntity.badRequest().body(statusResponse);
-        }
-        return ResponseEntity.ok(adminService.removeRoleFromUser(request));
+
+        return adminService.removeRoleFromUser(request);
     }
 }

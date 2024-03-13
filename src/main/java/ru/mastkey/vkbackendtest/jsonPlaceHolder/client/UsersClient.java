@@ -47,6 +47,7 @@ public class UsersClient {
     }
 
     public UsersResponse getUserById(Long id) {
+        log.info("Getting user with id {}", id);
         String url = this.url + "/" + id;
         HttpGet httpGet = new HttpGet(url);
 

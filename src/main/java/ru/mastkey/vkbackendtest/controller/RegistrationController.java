@@ -27,10 +27,6 @@ public class RegistrationController {
     )
     @PostMapping("/registration")
     public ResponseEntity<StatusResponse> registration(@Valid @RequestBody UserRegistrationRequest request) {
-        StatusResponse response = registrationService.registration(request);
-        if (!response.getStatus().equals("Registration successful")) {
-            return ResponseEntity.badRequest().body(response);
-        }
-        return ResponseEntity.ok(registrationService.registration(request));
+        return registrationService.registration(request);
     }
 }
