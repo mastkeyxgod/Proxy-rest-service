@@ -1,4 +1,4 @@
-# Vk Java Test
+# REST-API
 
 Проект написан на Java 17 с использованием Spring Framework и его модулей.
 
