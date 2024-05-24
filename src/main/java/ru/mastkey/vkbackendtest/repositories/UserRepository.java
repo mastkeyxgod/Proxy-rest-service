@@ -7,9 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mastkey.vkbackendtest.entity.User;
 
-
-@Transactional
-@Component
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
 
