@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/sqlSchema.sql
+  - include:
+      file: db/changelog/insertTestUsers.sql

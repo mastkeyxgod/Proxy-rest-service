@@ -26,9 +26,9 @@ public class AdminController {
             description = "Позволяет добавить роль пользователю по его username и roleName"
     )
     @PostMapping("/add-role")
-    public ResponseEntity<StatusResponse> addRole(@RequestBody AddOrRemoveUserRoleRequest request) {
-
-        return adminService.addRoleToUser(request);
+    public ResponseEntity<?> addRole(@RequestBody AddOrRemoveUserRoleRequest request) {
+        adminService.addRoleToUser(request);
+        return ResponseEntity.ok().build();
     }
 
     @Operation(
@@ -36,8 +36,8 @@ public class AdminController {
             description = "Позволяет удалить роль пользователя по его username и roleName"
     )
     @PostMapping("/remove-role")
-    public ResponseEntity<StatusResponse> removeRole(@RequestBody AddOrRemoveUserRoleRequest request) {
-
-        return adminService.removeRoleFromUser(request);
+    public ResponseEntity<?> removeRole(@RequestBody AddOrRemoveUserRoleRequest request) {
+        adminService.removeRoleFromUser(request);
+        return ResponseEntity.ok().build();
     }
 }

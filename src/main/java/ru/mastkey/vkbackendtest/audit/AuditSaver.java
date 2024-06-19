@@ -13,7 +13,7 @@ public class AuditSaver {
     private final AuditRepository auditRepository;
     public void save(String ip, String username, String endPoint, String method, boolean status) {
         Audit audit = new Audit();
-        audit.setUser(username);
+        audit.setUsername(username);
         audit.setIp(ip);
         audit.setTimestamp(LocalDateTime.now());
         audit.setEndpoint(endPoint);

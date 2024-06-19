@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mastkey.vkbackendtest.dto.StatusResponse;
 import ru.mastkey.vkbackendtest.dto.UserRegistrationRequest;
+import ru.mastkey.vkbackendtest.entity.User;
 import ru.mastkey.vkbackendtest.service.RegistrationService;
 
 @RestController
@@ -26,7 +27,7 @@ public class RegistrationController {
             description = "Регистрирует нового пользователя в системе"
     )
     @PostMapping("/registration")
-    public ResponseEntity<StatusResponse> registration(@Valid @RequestBody UserRegistrationRequest request) {
-        return registrationService.registration(request);
+    public ResponseEntity<Long> registration(@Valid @RequestBody UserRegistrationRequest request) {
+        return ResponseEntity.ok(registrationService.registration(request));
     }
 }

@@ -1,88 +1,44 @@
 package ru.mastkey.vkbackendtest.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
-@NoArgsConstructor
+@Table(name = "audit")
 public class Audit {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Size(max = 255)
+    @Column(name = "method")
     private String method;
 
+    @Size(max = 255)
+    @Column(name = "endpoint")
     private String endpoint;
 
+    @Size(max = 255)
+    @Column(name = "status")
     private String status;
 
-    private String user;
+    @Size(max = 255)
+    @Column(name = "username")
+    private String username;
 
+    @Size(max = 255)
+    @Column(name = "ip")
     private String ip;
 
+    @Column(name = "\"timestamp\"")
     private LocalDateTime timestamp;
 
-    public Audit(LocalDateTime timestamp, String user, String endpoint, String status) {
-        this.timestamp = timestamp;
-        this.user = user;
-        this.endpoint = endpoint;
-        this.status = status;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public String getEndpoint() {
-        return endpoint;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
 }
